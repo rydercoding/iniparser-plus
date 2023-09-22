@@ -715,10 +715,22 @@ static bool iniparser_is_valid_val(const char *str)
 /**
   @brief    Set an entry in a dictionary.
   @param    ini     Dictionary to modify.
+  @param    entry   Entry to modify (entry name)
+  @param    val     New value to associate to the entry.
+  @return   int 0 if Ok, -1 otherwise.
 
   If the given entry can be found in the dictionary, it is modified to
   contain the provided value. If it cannot be found, the entry is created.
   It is Ok to set val to NULL.
+
+  This function has addtional error checks on top of iniparser_set:
+    - Only displayed ASCII characters are allowed for entry and val. (Range: 32-126)
+    - For section & key:
+        - The following characters are not allowed: '[',  ']',  '='
+        - section + key can only have 0 or 1 of ':'
+        - Empty string is not allowed for either section or key.
+    - For value:
+        - The following characters are not allowed: '[',  ']',  '='
  */
 /*--------------------------------------------------------------------------*/
 int iniparser_chk_set(dictionary * ini, const char * entry, const char * val)

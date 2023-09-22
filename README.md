@@ -1,5 +1,8 @@
 ## I - Overview
 
+iniparse-plus has added the following enhancement on top of iniparser:
+  - Add a new interface iniparser_chk_set which added error checks on top of iniparser_set.
+
 This modules offers parsing of ini files from the C level.
 See a complete documentation in HTML format, from this directory
 open the file html/index.html with any browser.
